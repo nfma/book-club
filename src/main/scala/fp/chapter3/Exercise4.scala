@@ -1,0 +1,12 @@
+package fp.chapter3
+
+import Exercise2.tail
+
+object Exercise4 {
+  @annotation.tailrec
+  def drop[A](l: List[A], n: Int): List[A] = n match {
+    case a if a < 0 => l
+    case 0 => l
+    case _ => drop(tail(l), n - 1) 
+  }
+}
