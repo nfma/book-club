@@ -1,8 +1,9 @@
-project/target
-target
-tmp
-.history
-dist
-/.idea
-/*.iml
+*/project/target
+*/target
+*/tmp
+*/.history
+*/dist
+*/.idea
+*/*.iml
 node_modules
+*/src/main
