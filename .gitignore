@@ -4,5 +4,6 @@ tmp
 .history
 dist
 /.idea
+/.idea_modules
 /*.iml
 node_modules
