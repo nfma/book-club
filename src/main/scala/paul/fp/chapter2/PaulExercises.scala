@@ -1,4 +1,4 @@
-package paul.chapter2
+package paul.fp.chapter2
 
 object PaulSolutionExercise1 {
   def fib(n: Int): Int = {
@@ -23,19 +23,13 @@ object PaulSolutionExercise2 {
 }
 
 object PaulSolutionExercise3 {
-  def curry[A, B, C, D](f: (A, B) => C): A => (B => C) = (a: A) => (b: B) => f(a, b)
+  def curry[A, B, C, D](f: (A, B) => C): A => (B => C) = a => b => f(a, b)
 }
 
 object PaulSolutionExercise4 {
-  def uncurry[A, B, C](f: A => B => C): (A, B) => C = {
-    (a: A, b: B) => {
-      f(a)(b)
-    }
-  }
+  def uncurry[A, B, C](f: A => B => C): (A, B) => C = (a,b) => f(a)(b)
 }
 
 object PaulSolutionExercise5 {
-  def compose[A, B, C](f: B => C, g: A => B): A => C = {
-    (a: A) => f(g(a))
-  }
+  def compose[A, B, C](f: B => C, g: A => B): A => C = a => f(g(a))
 }

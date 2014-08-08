@@ -1,10 +1,10 @@
 package paul.fp.chapter2
 
-import paul.chapter2.PaulSolutionExercise1._
-import paul.chapter2.PaulSolutionExercise2.isSorted
-import paul.chapter2.PaulSolutionExercise3._
-import paul.chapter2.PaulSolutionExercise4._
-import paul.chapter2.PaulSolutionExercise5._
+import paul.fp.chapter2.PaulSolutionExercise1._
+import paul.fp.chapter2.PaulSolutionExercise2.isSorted
+import paul.fp.chapter2.PaulSolutionExercise3._
+import paul.fp.chapter2.PaulSolutionExercise4._
+import paul.fp.chapter2.PaulSolutionExercise5._
 import org.scalatest.{FunSpec, Matchers}
 
 class PaulExercisesSpec extends FunSpec with Matchers {

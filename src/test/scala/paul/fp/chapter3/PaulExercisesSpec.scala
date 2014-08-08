@@ -11,7 +11,9 @@ class PaulExercisesSpec extends FunSpec with Matchers {
 
   describe("Exercise 2") {
     describe("tail") {
-      it("should remove the first element of a list")
+      it("should remove the first element of a list") {
+
+      }
     }
   }
 
