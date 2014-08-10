@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 */project/target
 */target
 */tmp
@@ -8,14 +7,3 @@
 */*.iml
 node_modules
 */src/main
-=======
-project/target
-target
-tmp
-.history
-dist
-/.idea
-/.idea_modules
-/*.iml
-node_modules
->>>>>>> 1aa90374a38c09b941bb956925ce1c032c7fb8bd
