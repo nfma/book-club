@@ -6,5 +6,4 @@
 */.idea
 */*.iml
 node_modules
-*/src/main
 .idea_modules/
