@@ -1,4 +1,4 @@
-*/project/target
+**/project/target/
 */target
 */tmp
 */.history
@@ -7,3 +7,4 @@
 */*.iml
 node_modules
 */src/main
+.idea_modules/
