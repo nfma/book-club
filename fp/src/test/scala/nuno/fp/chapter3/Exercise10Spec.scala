@@ -1,6 +1,6 @@
 package nuno.fp.chapter3
 
-import nuno.fp.chapter3.Exercise10._
+import nuno.fp.chapter3.Exercise10.foldLeft
 import org.scalatest.{Matchers, WordSpec}
 
 class Exercise10Spec extends WordSpec with Matchers {
