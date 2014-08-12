@@ -16,6 +16,9 @@ class Ch02Spec extends FunSpec with Matchers {
         Range(0, 6).map(fib(_)) should equal(Seq(0, 1, 1, 2, 3, 5))
       }
     }
+    describe("fibonacci of a big number") {
+      fib(45) should equal(1134903170)
+    }
   }
 
   describe("Ex 2") {
