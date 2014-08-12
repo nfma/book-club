@@ -51,6 +51,10 @@ class Ch03Spec extends FunSpec with Matchers {
 
   describe("Ex 5") {
     import misterflibble.fp.chapter3.Ex5._
+    /**
+     * See also:  http://www.haskell.org/ghc/docs/6.12.2/html/libraries/base-4.2.0.1/Data-List.html#v%3AdropWhile
+     *      and:  https://docs.python.org/2/library/itertools.html#itertools.dropwhile
+     */
     it("dropWhile") {                             // scalacheck bait...
       def tt(i:Int) = true
       def ff(i:Int) = false
