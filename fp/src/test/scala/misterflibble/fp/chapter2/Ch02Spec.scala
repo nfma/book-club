@@ -63,6 +63,12 @@ class Ch02Spec extends FunSpec with Matchers {
   case class Bee(s:String)
   case class Cee(s:String)
 
+//  Ex 3
+//  [info] - normal fn to curried *** FAILED ***
+//    [info]   class misterflibble.fp.chapter2.Ch02Spec$Cee did not equal class misterflibble.fp.chapter2.Ch02Spec$Cee$ (Ch02Spec.scala:75)
+// so:
+//     1) what exactly happened?
+//     2) what is the right way to resolve this so we make and assert against the same, single type of Cee(...)?
   describe("Ex 3") {
     def ff(a:Ay, b:Bee) : Cee = Cee(a.s+"-"+b.s)
     it("normal fn to curried") {
@@ -72,8 +78,10 @@ class Ch02Spec extends FunSpec with Matchers {
         Cee(k.s) should equal(expected)
 
       // WRONK! Herr Flibble - he ist not happy!
-//        k.getClass should equal(Cee.getClass) //why aren't these the same class? why?
+        k.getClass should equal(Cee.getClass) //why aren't these the same class? why?
 //        k should equal(Cee("ayy-bee"))
+
+
       }
   }
 
