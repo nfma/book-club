@@ -21,10 +21,11 @@ class Ch02Spec extends FunSpec with Matchers {
   describe("Ex 2") {
     describe("isSorted") {
 
-      def gt(i: Int, j: Int): Boolean = i > j
+      def gt(i: Int, j: Int): Boolean     = i > j
+      def gtOrEq(i: Int, j: Int): Boolean = i >= j
 
       val a: Array[Int] = Array(1, 2, 3, 4, 5)
-      val a2: Array[Int] = Array(1, 2, 3, 4, 5)
+      val a2: Array[Int] = Array(1, 2, 3, 3, 4, 5)
       val b: Array[Int] = a.reverse
       val c: Array[Int] = Array(10, 2, 3, 4, 5)
       val c2: Array[Int] = Array(1, 2, 30, 4, 5)
@@ -41,8 +42,11 @@ class Ch02Spec extends FunSpec with Matchers {
       it("should return true on ascending integer array with gt") {
         isSorted[Int](a, gt) should equal(true)
       }
-      it("should return true on ascending integer array with repetitions, gt") {
-        isSorted[Int](a2, gt) should equal(true)
+      it("should return false on ascending integer array with repetitions, gt") {
+        isSorted[Int](a2, gt) should equal(false)
+      }
+      it("should return true on ascending integer array with repetitions, gtOrEq") {
+        isSorted[Int](a2, gtOrEq) should equal(true)
       }
       it("should return false on descending integer array with gt") {
         isSorted[Int](b, gt) should equal(false)
@@ -63,12 +67,6 @@ class Ch02Spec extends FunSpec with Matchers {
   case class Bee(s:String)
   case class Cee(s:String)
 
-//  Ex 3
-//  [info] - normal fn to curried *** FAILED ***
-//    [info]   class misterflibble.fp.chapter2.Ch02Spec$Cee did not equal class misterflibble.fp.chapter2.Ch02Spec$Cee$ (Ch02Spec.scala:75)
-// so:
-//     1) what exactly happened?
-//     2) what is the right way to resolve this so we make and assert against the same, single type of Cee(...)?
   describe("Ex 3") {
     def ff(a:Ay, b:Bee) : Cee = Cee(a.s+"-"+b.s)
     it("normal fn to curried") {
@@ -77,10 +75,8 @@ class Ch02Spec extends FunSpec with Matchers {
         val expected = Cee("aay-bee")
         Cee(k.s) should equal(expected)
 
-//        k.getClass should equal(Cee.getClass) //why aren't these the same class? why?
-//        k should equal(Cee("ayy-bee"))
-
-
+        k.getClass should equal(Cee("A").getClass)
+        k should equal(Cee("aay-bee"))
       }
   }
 
