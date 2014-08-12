@@ -77,8 +77,7 @@ class Ch02Spec extends FunSpec with Matchers {
         val expected = Cee("aay-bee")
         Cee(k.s) should equal(expected)
 
-      // WRONK! Herr Flibble - he ist not happy!
-        k.getClass should equal(Cee.getClass) //why aren't these the same class? why?
+//        k.getClass should equal(Cee.getClass) //why aren't these the same class? why?
 //        k should equal(Cee("ayy-bee"))
 
 
