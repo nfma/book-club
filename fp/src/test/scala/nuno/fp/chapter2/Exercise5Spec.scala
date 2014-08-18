@@ -16,5 +16,12 @@ class Exercise5Spec extends WordSpec with Matchers {
     "compose increment with identity is the same as increment" in {
       compose[Int, Int, Int](identity, _ + 1)(2) should be(3)
     }
+
+    "compose with all different types" in {
+      case class A()
+      case class B()
+      case class C()
+      compose[A, B, C](_ => C(), _ => B())(A()) should be(C())
+    }
   }
 }

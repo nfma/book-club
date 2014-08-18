@@ -5,8 +5,9 @@ import org.scalatest.WordSpec
 class Exercise7Spec extends WordSpec {
   "Exercise 7" should {
     "answer questions" in {
-      println("Yes, it can; Because a product of anything by 0.0 is 0.0")
-      println("You would immediately stop recurring before getting till the end of the list and instead return 0.0 as the final result of processing the rest of the list, and calculate the result given the pending calculations")
+      println("No, it can't; Unless we throw an exception on the reduce function, there's no way to stop the foldRight from going through all the elements")
+      println("""I can't see how this could be done without changing fold. We could provide an additional function or element to fold that would be able to
+          |short circuit if the result arrived at the same value as this value or function, for example 0.0 in a product and not bother to carry on recursing""".stripMargin)
     }
   }
 }

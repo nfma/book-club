@@ -6,7 +6,5 @@ object Exercise9 {
     case Cons(x, xs) => f(x, foldRight(xs, z)(f))
   }
 
-  def length[A](l: List[A]): Int = {
-    foldRight[A, Int](l, 0)((a, b) => b + 1)
-  }
+  def length[A](l: List[A]): Int = foldRight[A, Int](l, 0)((a, b) => b + 1)
 }
