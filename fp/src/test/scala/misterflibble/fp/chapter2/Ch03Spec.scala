@@ -83,6 +83,7 @@ class Ch03Spec extends FunSpec with Matchers {
       val l5 = List(1,2,3,4,5)
       init(Nil) should equal(Nil)
       init(l5) should equal(List(1,2,3,4))
+      init(List(1)) should equal(Nil)
     }
   }
 
