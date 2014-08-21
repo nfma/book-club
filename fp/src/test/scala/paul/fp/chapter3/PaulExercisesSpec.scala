@@ -13,6 +13,7 @@ class PaulExercisesSpec extends FunSpec with Matchers {
     describe("tail") {
       it("should remove the first element of a list") {
         List.tail(List(1,2,3)) should equal(List(2,3))
+        List.tail(Nil)
       }
     }
   }
@@ -21,6 +22,7 @@ class PaulExercisesSpec extends FunSpec with Matchers {
     describe("setHead") {
       it("replace the first element of a List with a different value") {
         List.setHead(List(1,2,3), 5) should equal(List(5,2,3))
+        List.setHead(List(), 5) should equal(List(5))
       }
     }
   }
@@ -72,16 +74,32 @@ class PaulExercisesSpec extends FunSpec with Matchers {
     }
   }
 
-  describe("Exercise 10.1") {
-    describe("foldRight should explode with a stack overflow error") {
-      it("existing foldRight is not tail recursive so will result in a stack overflow for long lists") {
-        var longList:List[Int] = List()
-        for(i <- 1 to 325000)
-          longList = List.append(longList, List(i))
+  describe("Exercise 10") {
+    describe("foldLeft") {
+      it("should go through list from head to tail and pass each element to function f") {
+        List.foldLeft(List(1,2,3,4), 0)((b,a) => b+a) should equal(10)
+        List.foldLeft(List(1,2,3,4), "A")((b,a) => b+a) should equal("A1234")
+      }
+    }
+  }
 
-        intercept[java.lang.StackOverflowError] {
-          List.foldRight(longList,0)((x,y) => x+y)
-        }
+  describe("Exercise 11") {
+    describe("sumUsingFoldLeft") {
+      it("should calculate sum using foldLeft") {
+        List.sumUsingFoldLeft(List(4,2,3,4)) should equal(13)
+      }
+    }
+    describe("productUsingFoldLeft") {
+      it("should calculate sum using foldLeft") {
+        List.productUsingFoldLeft(List(1,2,3,4)) should equal(24)
+      }
+    }
+  }
+
+  describe("Exercise 12") {
+    describe("reverseUsingFold") {
+      it("should reverse a list using a fold") {
+        println("this is a test")
       }
     }
   }
