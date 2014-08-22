@@ -8,8 +8,9 @@ case class Cons[+A](head: A, tail: List[A]) extends List[A] // Another data cons
 
 object List {
 
+
   // `List` companion object. Contains functions for creating and working with lists.
-def sum(ints: List[Int]): Int = ints match { // A function that uses pattern matching to add up a list of integers
+  def sum(ints: List[Int]): Int = ints match { // A function that uses pattern matching to add up a list of integers
     case Nil => 0 // The sum of the empty list is 0.
     case Cons(x,xs) => x + sum(xs) // The sum of a list starting with `x` is `x` plus the sum of the rest of the list.
   }
@@ -86,7 +87,19 @@ def sum(ints: List[Int]): Int = ints match { // A function that uses pattern mat
   def map[A,B](l: List[A])(f: A => B): List[B] = sys.error("todo")
 
   def sumUsingFoldLeft(list: List[Int]):Int = foldLeft(list, 0)(_ + _)
+
   def productUsingFoldLeft(list: List[Int]):Int = foldLeft(list, 1)(_ * _)
 
-  def reverseUsingFoldLeft(list: List[Int]):Int = foldLeft(list, 0)(_ + _)
+  def reverseUsingFoldLeft[A](l: List[A]): List[A] = foldLeft(l, List[A]())((reversedList,h) =>  Cons(h, reversedList))
+
+  def appendUsingFoldLeft(l1: List[Int], l2: List[Int]) = foldLeft(reverseUsingFoldLeft(l1), l2)((appendedList,h) => Cons(h, appendedList))
+
+  def transform[A,B](l: List[A], f: A => B): List[B] = foldRight(l, List[B]())((appendedList,h) => Cons(f(h), appendedList))
+
+  def studyReverse[A](l: List[A]): List[A] = foldLeft(l, List[A]())((reversedList, h) => (Cons(h, reversedList)))
+
 }
+
+
+
+
