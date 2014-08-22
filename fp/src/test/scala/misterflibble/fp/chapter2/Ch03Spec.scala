@@ -177,10 +177,15 @@ class Ch03Spec extends FunSpec with Matchers {
     }
   }
   describe("Ex 14"){
-    it("ex 14"){ // "could do better..." ;-)
-//      Ex14.append(List(),4)  should equal(List(4))
-//      Ex14.append(List(1,2),4)  should equal(List(1,2,4))
-//      Ex14.append(List(1,2,3),4)  should equal(List(1,2,3,4))
+    it("ex 14 - foldRight"){ // "could do better..." ;-)
+      Ex14.append(List(),4)  should equal(List(4))
+      Ex14.append(List(1,2),4)  should equal(List(1,2,4))
+      Ex14.append(List(1,2,3),4)  should equal(List(1,2,3,4))
+    }
+    it("ex 15 - foldLeft"){
+//      Ex14.appendL(List(),4)  should equal(List(4))
+//      Ex14.appendL(List(1,2),4)  should equal(List(1,2,4))
+//      Ex14.appendL(List(1,2,3),4)  should equal(List(1,2,3,4))
     }
   }
 
