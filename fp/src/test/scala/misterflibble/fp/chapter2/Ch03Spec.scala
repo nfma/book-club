@@ -144,4 +144,49 @@ class Ch03Spec extends FunSpec with Matchers {
     }
   }
 
+  describe("Ex 11"){
+    //EXERCISE 11: Write sum, product, and a function to compute the length of a list using foldLeft.
+    it("ex 11 sum"){
+      Ex11.sum(List())    should equal(0)
+      Ex11.sum(List(1))   should equal(1)
+      Ex11.sum(List(1,2)) should equal(3)
+    }
+    it("ex 11 product"){
+      Ex11.product(List())      should equal(0)
+      Ex11.product(List(10))    should equal(10)
+      Ex11.product(List(10,20)) should equal(200)
+    }
+    it("ex 11 length"){
+      Ex11.length(List())      should equal(0)
+      Ex11.length(List(10))    should equal(1)
+      Ex11.length(List(10,20)) should equal(2)
+    }
+  }
+  describe("Ex 12"){
+    it("ex 12"){
+      Ex12.reverse(List())      should equal(List())
+      Ex12.reverse(List(1))     should equal(List(1))
+      Ex12.reverse(List(1,2))   should equal(List(2,1))
+      Ex12.reverse(List(1,2,3)) should equal(List(3,2,1))
+    }
+  }
+  describe("Ex 13"){
+    it("ex 13"){
+//      Ex13.foldLeft2()
+//      Ex13.foldRight2()
+    }
+  }
+  describe("Ex 14"){
+    it("ex 14 - foldRight"){ // "could do better..." ;-)
+      Ex14.append(List(),4)  should equal(List(4))
+      Ex14.append(List(1,2),4)  should equal(List(1,2,4))
+      Ex14.append(List(1,2,3),4)  should equal(List(1,2,3,4))
+    }
+    it("ex 15 - foldLeft"){
+//      Ex14.appendL(List(),4)  should equal(List(4))
+//      Ex14.appendL(List(1,2),4)  should equal(List(1,2,4))
+//      Ex14.appendL(List(1,2,3),4)  should equal(List(1,2,3,4))
+    }
+  }
+
 }
