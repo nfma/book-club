@@ -94,7 +94,7 @@ object List {
 
   def appendUsingFoldLeft(l1: List[Int], l2: List[Int]) = foldLeft(reverseUsingFoldLeft(l1), l2)((appendedList,h) => Cons(h, appendedList))
 
-  def transform[A,B](l: List[A], f: A => B): List[B] = foldRight(l, List[B]())((appendedList,h) => Cons(f(h), appendedList))
+//  def transform[A,B](l: List[A], f: A => B): List[B] = foldRight(l, List[B]())((appendedList,h) => Cons(f(h), appendedList))
 
   def studyReverse[A](l: List[A]): List[A] = foldLeft(l, List[A]())((reversedList, h) => (Cons(h, reversedList)))
 
