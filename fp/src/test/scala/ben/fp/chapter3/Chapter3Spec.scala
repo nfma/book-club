@@ -38,7 +38,9 @@ class Chapter3Spec extends WordSpec with Matchers {
     dropWhile(Nil, greaterThanTwo) shouldBe Nil
     dropWhile(List(3, 4, 5), greaterThanTwo) shouldBe Nil
     dropWhile(List(1), greaterThanTwo) shouldBe List(1)
-    dropWhile(List(2, 1), greaterThanTwo) shouldBe List(1, 2)
+    dropWhile(List(2, 1), greaterThanTwo) shouldBe List(2, 1)
     dropWhile(List(3, 2, 1), greaterThanTwo) shouldBe List(2, 1)
   }
+
+
 }
