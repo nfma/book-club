@@ -30,6 +30,19 @@ object List {
 
   def setHead[A](head: A, xs: List[A]) = xs match {
     case Nil => List(head)
-    case tail@Cons(x, rest) => Cons(head, tail)
+    case Cons(x, tail) => Cons(head, tail)
   }
+
+  def drop[A](l: List[A], n: Int): List[A] = {
+    if(n == 0) l
+    else {
+      l match {
+        case Nil if n > 0 => throw new IllegalArgumentException("Cannot drop on an empty list")
+        case Nil => l
+        case Cons(x,xs) => drop(xs, n-1)
+      }
+    }
+  }
+
+  def dropWhile[A](l: List[A], f: A => Boolean): List[A] = ???
 }
