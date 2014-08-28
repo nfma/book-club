@@ -53,7 +53,6 @@ class PaulExercisesSpec extends FunSpec with Matchers {
   describe("Exercise 7") {
     describe("init") {
       it("should answer the question in the test") {
-//        answer should not equal("")
       }
     }
   }
@@ -61,7 +60,6 @@ class PaulExercisesSpec extends FunSpec with Matchers {
   describe("Exercise 8") {
     describe("see what happens when you pass Nil and Cons to foldRight ") {
       it("should answer the question in the test") {
-//        foldRight(List(1,2,3), Nil:List[Int])(Cons(_,_))
       }
     }
   }
@@ -99,10 +97,6 @@ class PaulExercisesSpec extends FunSpec with Matchers {
   describe("Exercise 12") {
     describe("reverseUsingFold") {
       it("should reverse a list using a fold") {
-        // So list would be
-        // 1,2,3 = 1
-        // 2,3 = 2,1
-        // 3 = 3,2,1
         List.reverseUsingFoldLeft(List(1,2,3)) should equal(List(3,2,1))
         List.reverseUsingFoldLeft(List(1,2,3,4)) should equal(List(4,3,2,1))
       }
@@ -117,48 +111,45 @@ class PaulExercisesSpec extends FunSpec with Matchers {
   describe("Exercise 14") {
     describe("appendUsingFold") {
       it("should append one list to the other using fold") {
-        // So list would be
-        // 1,2,3 = 1
-        // 2,3 = 2,1
-        // 3 = 3,2,1
         List.appendUsingFoldLeft(List(1,2,3), List(4,5,6)) should equal(List(1,2,3,4,5,6))
       }
     }
   }
 
   describe("Exercise 16") {
-    describe("appendUsingFold") {
+    describe("transformUsingFoldRight") {
       it("should transform a list of elements by adding 1 to each one.") {
-        // So list would be
-        // 1,2,3 = 2,3,4
-//        List.transform(List(1,2,3), (a:Int, b:Int) => a < b) should equal(List(2,3,4))
+        List.transformUsingFoldRight(List(1,2,3), (a:Int) => a + 1) should equal(List(2,3,4))
+      }
+    }
+    describe("transformUsingFoldLeft") {
+      it("should transform a list of elements by adding 1 to each one.") {
+        List.transformUsingFoldLeft(List(1,2,3), (a:Int) => a + 1) should equal(List(2,3,4))
       }
     }
   }
-
 
   describe("Exercise 17") {
     describe("convertDoubleToString in list") {
       it("should convert each element in a list from double to String.") {
-        // So list would be
-        // 1,2,3 = 2,3,4
-//        List.transform(List(1,2,3)) should equal(List("1","2","3"))
+        List.transformUsingFoldRight(List(1,2,3), (a:Int) => a.toString) should equal(List("1","2","3"))
       }
     }
   }
 
-
-
-  describe("Study Mode") {
-    describe("going through examples - repition") {
-      it(".") {
-        // So list would be
-        // 1,2,3 = 3,2,1
-        //List.studyReverse(List(1,2,3)) should equal(List(2,3,4))
-      }
+  describe("map") {
+    it("should transform a list of elements by multiplying each element by 3.") {
+      List.map(List(1,2,3))((a:Int) => a * 3) should equal(List(3,6,9))
     }
   }
 
-
+  describe("filter") {
+    it("should remove odd numbers from a list.") {
+      List.filter(List(1,2,3,4))((a:Int) => a % 2 == 0) should equal(List(2,4))
+    }
+    it("should remove even numbers from a list.") {
+      List.filter(List(1,2,3,4))((a:Int) => a % 2 != 0) should equal(List(1,3))
+    }
+  }
 
 }
