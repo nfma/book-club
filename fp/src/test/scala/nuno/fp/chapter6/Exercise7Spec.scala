@@ -9,8 +9,8 @@ class Exercise7Spec extends WordSpec with Matchers {
   "Exercise 7" should {
     "implement sequence" in {
       sequence(List())(Simple(42)) should be((Nil, Simple(42)))
-      sequence[Double](List(rng => double(rng)))(Simple(42)) should be((List(0.007524831689672932), Simple(1059025964525L)))
-      sequence(List(rng => nonNegativeInt(rng), rng => double(rng), rng => double(rng)))(Simple(42)) should
+      sequence(List(double _))(Simple(42)) should be((List(0.007524831689672932), Simple(1059025964525L)))
+      sequence(List(nonNegativeInt _, double _, double _))(Simple(42)) should
         be((List(16159453, 0.5967354856416283, 0.15846728447753344), Simple(259172689157871L)))
     }
 
