@@ -1,7 +1,7 @@
 package nuno.fp.chapter6
 
-import nuno.fp.chapter6.Exercise1.{nonNegativeInt, Simple}
-import nuno.fp.chapter6.Exercise9.{map2, map}
+import nuno.fp.chapter6.Exercise1.{Simple, nonNegativeInt}
+import nuno.fp.chapter6.Exercise9.{map, map2}
 import org.scalatest.{Matchers, WordSpec}
 
 class Exercise9Spec extends WordSpec with Matchers {

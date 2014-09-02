@@ -5,14 +5,6 @@ import nuno.fp.chapter6.Exercise10.State.{get, set}
 
 object Exercise11 {
 
-  sealed trait Input
-
-  case object Coin extends Input
-
-  case object Turn extends Input
-
-  case class Machine(locked: Boolean, candies: Int, coins: Int)
-
   def simulateMachine(inputs: List[Input]): State[Machine, (Int, Int)] = inputs match {
     case Nil => get[Machine].map(m => (m.candies, m.coins))
     case Coin :: t => for {
@@ -26,4 +18,13 @@ object Exercise11 {
       r <- simulateMachine(t)
     } yield r
   }
+
+  sealed trait Input
+
+  case class Machine(locked: Boolean, candies: Int, coins: Int)
+
+  case object Coin extends Input
+
+  case object Turn extends Input
+
 }

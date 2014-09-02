@@ -1,8 +1,8 @@
 package nuno.fp.chapter5
 
-import nuno.fp.chapter4.Exercise1.{Some, None, Option}
-import nuno.fp.chapter5.Exercise1.{Cons, Empty, Stream}
+import nuno.fp.chapter4.Exercise1.{None, Some}
 import nuno.fp.chapter5.Exercise1.Stream.unfold
+import nuno.fp.chapter5.Exercise1.{Cons, Empty, Stream}
 
 
 object Exercise13 {

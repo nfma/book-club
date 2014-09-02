@@ -1,6 +1,6 @@
 package nuno.fp.chapter6
 
-import nuno.fp.chapter6.Exercise11.{Turn, Coin, Machine, simulateMachine}
+import nuno.fp.chapter6.Exercise11.{Coin, Machine, Turn, simulateMachine}
 import org.scalatest.{Matchers, WordSpec}
 
 class Exercise11Spec extends WordSpec with Matchers {

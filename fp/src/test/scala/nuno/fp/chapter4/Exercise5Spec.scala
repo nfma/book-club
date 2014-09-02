@@ -2,7 +2,7 @@ package nuno.fp.chapter4
 
 import nuno.fp.chapter3.{List, Nil}
 import nuno.fp.chapter4.Exercise1.{None, Some}
-import nuno.fp.chapter4.Exercise5.{traverse, sequence}
+import nuno.fp.chapter4.Exercise5.{sequence, traverse}
 import org.scalatest.{Matchers, WordSpec}
 
 class Exercise5Spec extends WordSpec with Matchers {
