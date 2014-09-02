@@ -29,5 +29,9 @@ class Exercise11Spec extends WordSpec with Matchers {
       simulateMachine(List(Turn, Coin, Coin, Turn, Turn)).run(Machine(locked = true, 2, 0)) should be((1, 1), Machine(locked = true, 1, 1))
       simulateMachine(List(Turn, Coin, Coin, Turn, Coin, Turn, Turn, Coin)).run(Machine(locked = true, 2, 0)) should be((0, 2), Machine(locked = true, 0, 2))
     }
+
+    "make sure example in the book is correct" in {
+      simulateMachine(List(Coin, Turn, Coin, Turn, Coin, Turn, Coin, Turn)).run(Machine(locked = true, 5, 10)) should be((1, 14), Machine(locked = true, 1, 14))
+    }
   }
 }
