@@ -1,6 +1,6 @@
 package nuno.fp.chapter5
 
-import nuno.fp.chapter4.Exercise1.{Some, None}
+import nuno.fp.chapter4.Exercise1.{None, Some}
 import nuno.fp.chapter5.Exercise1.{Empty, Stream}
 import nuno.fp.chapter5.Exercise13.{map, take, takeWhile}
 import org.scalatest.{Matchers, WordSpec}

@@ -1,7 +1,7 @@
 package nuno.fp.chapter4
 
 import nuno.fp.chapter3.{List, Nil}
-import nuno.fp.chapter4.Exercise1.{Some, None}
+import nuno.fp.chapter4.Exercise1.{None, Some}
 import nuno.fp.chapter4.Exercise4.sequence
 import org.scalatest.{Matchers, WordSpec}
 

@@ -1,7 +1,7 @@
 package nuno.fp.chapter5
 
 import nuno.fp.chapter5.Exercise1.{Empty, Stream}
-import nuno.fp.chapter5.Exercise12.{ones, constant, from, fibs}
+import nuno.fp.chapter5.Exercise12.{constant, fibs, from, ones}
 import org.scalatest.{Matchers, WordSpec}
 
 class Exercise12Spec extends WordSpec with Matchers {
@@ -25,7 +25,7 @@ class Exercise12Spec extends WordSpec with Matchers {
       from(0).take(2).toList should be(Stream(0, 1).toList)
       from(0).take(5).toList should be(Stream(0, 1, 2, 3, 4).toList)
     }
-    
+
     "implement fibs in terms of unfold" in {
       fibs.take(0) should be(Empty)
       fibs.take(1).toList should be(Stream(0).toList)
@@ -34,7 +34,7 @@ class Exercise12Spec extends WordSpec with Matchers {
       fibs.take(4).toList should be(Stream(0, 1, 1, 2).toList)
       fibs.take(5).toList should be(Stream(0, 1, 1, 2, 3).toList)
       fibs.take(6).toList should be(Stream(0, 1, 1, 2, 3, 5).toList)
-      fibs.take(7).toList should be(Stream(0, 1, 1, 2, 3, 5, 8).toList)      
+      fibs.take(7).toList should be(Stream(0, 1, 1, 2, 3, 5, 8).toList)
     }
   }
 }

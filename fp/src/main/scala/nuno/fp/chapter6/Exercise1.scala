@@ -19,4 +19,5 @@ object Exercise1 {
       (n, nextRNG)
     }
   }
+
 }

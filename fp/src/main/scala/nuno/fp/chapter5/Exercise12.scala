@@ -1,8 +1,8 @@
 package nuno.fp.chapter5
 
 import nuno.fp.chapter4.Exercise1.Some
-import nuno.fp.chapter5.Exercise1.Stream.unfold
 import nuno.fp.chapter5.Exercise1.Stream
+import nuno.fp.chapter5.Exercise1.Stream.unfold
 
 
 object Exercise12 {

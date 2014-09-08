@@ -1,8 +1,8 @@
 package nuno.fp.chapter5
 
 import nuno.fp.chapter4.Exercise1.{None, Some}
-import nuno.fp.chapter5.Exercise1.{Empty, Stream}
 import nuno.fp.chapter5.Exercise1.Stream.unfold
+import nuno.fp.chapter5.Exercise1.{Empty, Stream}
 import org.scalatest.{Matchers, WordSpec}
 
 class Exercise11Spec extends WordSpec with Matchers {
