@@ -6,7 +6,7 @@ object Exercise1 {
 
     def map[B](f: A => B): Option[B] = this match {
       case Some(value) => Some(f(value))
-      case None => None
+      case _ => None
     }
 
     def flatMap[B](f: A => Option[B]): Option[B] = map(f) getOrElse None
