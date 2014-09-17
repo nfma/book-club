@@ -54,14 +54,14 @@ object Chapter4 {
 
     def traverse[A, B](a: List[A])(f: A => Option[B]): Option[List[B]] = {
 
-      def process(d: List[A], results: Option[List[B]]): Option[List[B]] =
-        d match {
-          case Nil => None
-          case x :: xs => process(xs, f(x).flatMap(i => results.map(_ :+ i)))
+      def process(l: List[A], results: Option[List[B]] = None): Option[List[B]] =
+        l match {
+          case Nil => results
+          case x :: xs => process(xs, f(x).flatMap(i => results.map(_ :+ i) orElse Some(List(i)) ))
         }
 
 
-      process(a, Some(Nil))
+      process(a)
     }
   }
 

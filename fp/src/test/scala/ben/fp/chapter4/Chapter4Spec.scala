@@ -69,9 +69,9 @@ class Chapter4Spec extends WordSpec with Matchers {
 
 
   "Exercise 4.5 " should {
-    "traverse" ignore {
+    "traverse" in {
 
-      None.traverse[String, String](List("1"))( i => Some(s"$i $i") ) shouldBe Some(List("11"))
+      None.traverse[String, String](List("1"))( i => Some(s"$i $i") ) shouldBe Some(List("1 1"))
     }
   }
 }
