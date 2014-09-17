@@ -85,4 +85,48 @@ object List {
 
   // this doesn;t look linear, more exponential
   def concatenate[A](a1: List[List[A]]): List[A] = reverse(foldLeft(a1,Nil:List[A])((a,b) => append(b,a)))
+
+  def addOne(xs: List[Int]): List[Int] = xs match {
+    case Nil => Nil
+    case Cons(head, tail) => Cons(head +1, addOne(tail))
+  }
+
+  def stringify(xs: List[Double]): String = xs match {
+    case Nil => ""
+    case Cons(h,t) => h.toString + stringify(t)
+  }
+
+  def map[A,B](l: List[A])(f: A => B): List[B] = l match {
+    case Nil => Nil
+    case Cons(h,t) => Cons(f(h), map(t)(f))
+  }
+
+  def filter[A](l: List[A])(f: A => Boolean): List[A] = l match {
+    case Nil => Nil
+    case Cons(h,t) if f(h) => Cons(h, filter(t)(f))
+    case Cons(h,t) => filter(t)(f)
+  }
+
+  def filter2[A](l: List[A])(f: A => Boolean): List[A] = flatMap(l)(a => if(f(a)) Cons(a, Nil) else Nil)
+
+  def flatMap[A,B](l: List[A])(f: A => List[B]): List[B] = l match {
+    case Nil => Nil
+    case Cons(h,t) => append(f(h), flatMap(t)(f))
+  }
+
+  def zipWith[A](l: List[A], l2:List[A])(f:(A,A) => A): List[A] = (l, l2) match {
+    case (Cons(h,t), Cons(h2,t2)) => Cons(f(h,h2), zipWith(t,t2)(f))
+    case _ => Nil
+  }
+
+  @tailrec
+  def hasSubsequence[A](xs: List[A], xs2: List[A]): Boolean =
+    (xs, xs2) match {
+      case (_, Nil) => true
+      case (Nil, Cons(h,t)) => false
+      case (Cons(h,t), Cons(h1,t1)) if h == h1 => hasSubsequence(t,t1)
+      case (Cons(h,t), tt@Cons(h1,t1)) if h != h1 => hasSubsequence(t, tt)
+    }
+
+
 }

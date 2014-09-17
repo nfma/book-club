@@ -1,12 +1,12 @@
 package ben.fp.chapter3
 
+import ben.fp.chapter3.Tree._
+import ben.fp.chapter3.List._
 import org.scalatest.{Matchers, WordSpec}
-
 import scala.annotation.tailrec
 
 class Chapter3Spec extends WordSpec with Matchers {
 
-  import ben.fp.chapter3.List._
 
   "Exercise 2 - tail" in {
 
@@ -123,5 +123,92 @@ class Chapter3Spec extends WordSpec with Matchers {
   "Exercise 15 - concatenate" in {
 
     concatenate(List(List("a"), List("b","c"), List("d","e","f"))) shouldBe List("a","b","c","d","e","f")
+  }
+
+  "Exercise 16 - addOne " in {
+
+    addOne(List(1,2,3,4,5,6,7,8,9)) shouldBe List(2,3,4,5,6,7,8,9,10)
+  }
+
+  "Exercise 17 - stringify " in {
+
+    stringify(List(1,2,3)) shouldBe "1.02.03.0"
+  }
+
+  "Exercise 18 - map " in {
+
+    List.map(List(1,2,3))(_ + 1) shouldBe List(2,3,4)
+    List.map(List(2,3,4))(_.toString) shouldBe List("2","3","4")
+  }
+
+  "Exercise 19 - filter " in {
+
+    filter(List(1,2,3,4))(_ % 2 == 0) shouldBe List(2,4)
+  }
+
+  "Exercise 20 - flatMap " in {
+
+    flatMap(List(1,2,3,4))(i => List(i,i)) shouldBe List(1,1,2,2,3,3,4,4)
+  }
+
+
+  "Exercise 21 - filter using flatMap " in {
+
+    filter2(List(1,2,3,4))(_ % 2 == 0) shouldBe List(2,4)
+  }
+
+
+  "Exercise 22 - zipWith" in {
+
+    zipWith(List(1,2,3), List(4,5,6))(_ + _) shouldBe List(5,7,9)
+  }
+
+
+  "Exercise 23 - generalised zipWith" in {
+
+    zipWith(List("1","2","3"), List("4","5","6"))(_ + _) shouldBe List("14","25","36")
+  }
+
+  "Exercise 24 - has subsequence" in {
+
+    hasSubsequence(List("1","2","3","4","5"), List("4","5")) shouldBe true
+    hasSubsequence(List("1","2","3","4","5"), List("1")) shouldBe true
+    hasSubsequence(List("1","2","3","4","5"), List("1","2","3","4","5")) shouldBe true
+    hasSubsequence(List("1","2","3","4","5"), List("1","2","3")) shouldBe true
+  }
+
+
+
+
+  "Exercise 25 - tree size" in {
+
+    Tree.size(Branch(Leaf("a"), Leaf("b"))) shouldBe 3
+    Tree.size(Branch(Branch(Leaf("a"), Leaf("b")), Leaf("b"))) shouldBe 5
+    Tree.size(
+      Branch(
+        Branch(Leaf("a"), Leaf("b")),
+        Branch(Leaf("a"),
+          Branch(Leaf("a"), Leaf("b"))
+        )
+      )
+    ) shouldBe 9
+  }
+
+  "Exercise 26 - tree maximum" in {
+
+    Tree.maximum[Int](Branch(Leaf(1), Leaf(2))) shouldBe 2
+    Tree.maximum[Int](Branch(Branch(Leaf(1), Leaf(2)), Leaf(3))) shouldBe 3
+  }
+
+  "Exercise 27 - tree depth" in {
+
+    Tree.depth(Branch(Leaf(1), Leaf(2))) shouldBe 2
+    Tree.depth(Branch(Branch(Leaf(1), Leaf(2)), Leaf(3))) shouldBe 3
+    Tree.depth(Branch(Branch(Branch(Leaf(1), Leaf(1)), Leaf(1)), Leaf(1))) shouldBe 4
+  }
+
+  "Exercise 28 - tree map" in {
+
+    Tree.map(Branch(Leaf(1), Leaf(2)))(_ + 1) shouldBe Branch(Leaf(2), Leaf(3))
   }
 }
