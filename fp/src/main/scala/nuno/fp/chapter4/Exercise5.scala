@@ -10,6 +10,6 @@ object Exercise5 {
 
   def traverse[A, B](a: List[A])(f: A => Option[B]): Option[List[B]] = a match {
     case Nil => None
-    case _ => foldRight[A, Option[List[B]]](a, Some(Nil))((r, o) => map2(f(r), o)(Cons(_, _)))
+    case _ => foldRight[A, Option[List[B]]](a, Some(Nil)) {(r, o) => map2(f(r), o)(Cons(_, _))}
   }
 }

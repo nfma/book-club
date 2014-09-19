@@ -39,12 +39,6 @@ object List {
       case Cons(h,t) => Cons(h, append(t, a2))
     }
 
-  def foldRight[A,B](as: List[A], z: B)(f: (A, B) => B): B = // Utility functions
-    as match {
-      case Nil => z
-      case Cons(x, xs) => f(x, foldRight(xs, z)(f))
-    }
-
   def sum2(ns: List[Int]) =
     foldRight(ns, 0)((x,y) => x + y)
 
@@ -84,7 +78,11 @@ object List {
     case Cons(h,t) => foldLeft(t,f(z,h))(f)
   }
 
-  def map[A,B](l: List[A])(f: A => B): List[B] = sys.error("todo")
+  def foldRight[A,B](as: List[A], z: B)(f: (A, B) => B): B = // Utility functions
+    as match {
+      case Nil => z
+      case Cons(x, xs) => f(x, foldRight(xs, z)(f))
+    }
 
   def sumUsingFoldLeft(list: List[Int]):Int = foldLeft(list, 0)(_ + _)
 
@@ -94,9 +92,15 @@ object List {
 
   def appendUsingFoldLeft(l1: List[Int], l2: List[Int]) = foldLeft(reverseUsingFoldLeft(l1), l2)((appendedList,h) => Cons(h, appendedList))
 
-//  def transform[A,B](l: List[A], f: A => B): List[B] = foldRight(l, List[B]())((appendedList,h) => Cons(f(h), appendedList))
+  def transformUsingFoldRight[A,B](l: List[A], f: (A) => B): List[B] = foldRight(l, List[B]())((h,appendedList) => Cons(f(h), appendedList))
 
-  def studyReverse[A](l: List[A]): List[A] = foldLeft(l, List[A]())((reversedList, h) => (Cons(h, reversedList)))
+  def transformUsingFoldLeft[A,B](l: List[A], f: (A) => B): List[B] = foldLeft(reverseUsingFoldLeft(l), List[B]())((appendedList,h) => Cons(f(h), appendedList))
+
+  def recapReverse[A](l: List[A]): List[A] = foldRight(reverseUsingFoldLeft(l), List[A]())((h,list) => (Cons(h, list)))
+
+  def map[A,B](l: List[A])(f: A => B): List[B] = foldRight(l, List[B]())((h, acc) => Cons(f(h), acc))
+
+  def filter[A](l: List[A])(f: A => Boolean): List[A] = foldRight(l, List[A]())((h, acc) => if (f(h)) Cons(h, acc) else acc)
 
 }
 

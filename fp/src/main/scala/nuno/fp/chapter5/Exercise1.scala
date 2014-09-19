@@ -22,15 +22,18 @@ object Exercise1 {
 
     def headOption(): Option[A]
 
-    def headOption2(): Option[A] = foldRight[Option[A]](None)((a, b) => Some(a))
+    def headOption2(): Option[A] = foldRight[Option[A]](None) {(a, _) => Some(a)}
 
-    def map[B](f: A => B): Stream[B] = foldRight[Stream[B]](empty)((a, b) => cons(f(a), b))
+    def map[B](f: A => B): Stream[B] = foldRight[Stream[B]](empty) {(a, b) => cons(f(a), b)}
 
-    def flatMap[B](f: A => Stream[B]): Stream[B] = foldRight[Stream[B]](empty)((a, b) => f(a).append(b))
+    def flatMap[B](f: A => Stream[B]): Stream[B] = foldRight[Stream[B]](empty) {(a, b) => f(a).append(b)}
 
-    def filter(f: A => Boolean): Stream[A] = foldRight[Stream[A]](empty)((a, b) => if (f(a)) cons(a, b) else b)
+    def filter(f: A => Boolean): Stream[A] = foldRight[Stream[A]](empty) {
+      case (a, b) if f(a) => cons(a, b)
+      case (_, b) => b
+    }
 
-    def append[B >: A](s: Stream[B]): Stream[B] = foldRight[Stream[B]](s)((a, b) => cons(a, b))
+    def append[B >: A](s: Stream[B]): Stream[B] = foldRight[Stream[B]](s) {cons(_, _)}
 
     def zipWith[B >: A, C](s: Stream[B])(f: (A, B) => C): Stream[C] = unfold((this, s)) {
       case (Empty, _) => None
@@ -84,19 +87,22 @@ object Exercise1 {
 
     override def take(n: Int): Stream[A] = if (n <= 0) empty else cons(h(), t().take(n - 1))
 
-    override def drop(n: Int): Stream[A] = if (n <= 0) this else t().drop(n - 1)
+    override def drop(n: Int): Stream[A] = if (n <= 0) this else t() drop (n - 1)
 
-    override def dropWhile(p: A => Boolean): Stream[A] = if (p(h())) t().dropWhile(p) else this
+    override def dropWhile(p: A => Boolean): Stream[A] = if (p(h())) t() dropWhile p else this
 
-    override def takeWhile(p: A => Boolean): Stream[A] = foldRight[Stream[A]](empty)((a, b) => if (p(a)) cons(a, b) else empty)
+    override def takeWhile(p: A => Boolean): Stream[A] = foldRight[Stream[A]](empty) {
+      case (a, b) if p(a) => cons(a, b)
+      case _ => empty
+    }
 
-    override def forAll(p: A => Boolean) = p(h()) && t().forAll(p)
+    override def forAll(p: A => Boolean) = p(h()) && t().forAll {p}
 
-    override def foldRight[B](z: => B)(f: (A, => B) => B): B = f(h(), t().foldRight(z)(f))
+    override def foldRight[B](z: => B)(f: (A, => B) => B): B = f(h(), t().foldRight(z) {f})
 
     override def headOption(): Option[A] = Some(h())
 
-    override def startsWith[B](s: Stream[B]): Boolean = s != empty && zipWith(s)(_ == _).forAll(_ == true)
+    override def startsWith[B](s: Stream[B]): Boolean = s != empty && zipWith(s) {_ == _}.forAll {_ == true}
 
     override def scanRight[B](z: B)(f: (A, B) => B): Stream[B] = foldRight(Stream(z)) {
       case (a, s@Cons(hd, _)) => cons(f(a, hd()), s)
@@ -120,8 +126,7 @@ object Exercise1 {
 
     def unfold[A, S](z: S)(f: S => Option[(A, S)]): Stream[A] = f(z) match {
       case None => empty
-      case Some((a, s)) => cons(a, unfold(s)(f))
+      case Some((a, s)) => cons(a, unfold(s) {f})
     }
   }
-
 }
