@@ -7,7 +7,7 @@ object Exercise4 {
     case (0, gen) => (Nil, gen)
     case (nr, gen) =>
       val (a, gen2) = gen.nextInt
-      val (l, gen3) = ints(nr - 1)(gen2)
+      val (l, gen3) = ints(nr - 1) {gen2}
       (a :: l, gen3)
   }
 }

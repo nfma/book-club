@@ -27,7 +27,7 @@ object Exercise10 {
 
     def sequence[S, A](fs: List[State[S, A]]): State[S, List[A]] = fs match {
       case Nil => State.unit(Nil)
-      case h :: t => h.map2(sequence(t))(_ :: _)
+      case h :: t => h.map2(sequence(t)) {_ :: _}
     }
 
     def get[S]: State[S, S] = State(s => (s, s))

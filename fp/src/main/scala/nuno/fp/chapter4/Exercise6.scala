@@ -8,7 +8,7 @@ object Exercise6 {
       case _ => this
     }
 
-    def map2[EE >: E, B, C](b: Either[EE, B])(f: (A, B) => C): Either[EE, C] = flatMap(a => b.map(b => f(a, b)))
+    def map2[EE >: E, B, C](b: Either[EE, B])(f: (A, B) => C): Either[EE, C] = flatMap {a => b map {b => f(a, b)}}
 
     def map[B](f: A => B): Either[E, B] = this match {
       case Right(a) => Right(f(a))
