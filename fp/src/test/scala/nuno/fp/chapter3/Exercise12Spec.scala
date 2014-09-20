@@ -6,19 +6,19 @@ import org.scalatest.{Matchers, WordSpec}
 class Exercise12Spec extends WordSpec with Matchers {
   "Exercise 12" should {
     "return an empty list as the reverse of an empty list" in {
-      reverse(Nil) should be(Nil)
+      reverse(Nil) shouldBe Nil
     }
 
     "return a single element list as the reverse of a single element list" in {
-      reverse(List(1)) should be(List(1))
+      reverse(List(1)) shouldBe List(1)
     }
 
     "return a reversed two element list as the reverse of a two element list" in {
-      reverse(List(1, 2)) should be(List(2, 1))
+      reverse(List(1, 2)) shouldBe List(2, 1)
     }
 
     "return a reversed three element list as the reverse of a three element list" in {
-      reverse(List(1, 2, 3)) should be(List(3, 2, 1))
+      reverse(List(1, 2, 3)) shouldBe List(3, 2, 1)
     }
   }
 }

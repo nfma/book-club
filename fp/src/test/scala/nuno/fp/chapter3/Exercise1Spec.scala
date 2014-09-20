@@ -6,7 +6,7 @@ import org.scalatest.{Matchers, WordSpec}
 class Exercise1Spec extends WordSpec with Matchers {
   "Exercise 1" should {
     "answer the question" in {
-      r should be(3)
+      r shouldBe 3
     }
   }
 }

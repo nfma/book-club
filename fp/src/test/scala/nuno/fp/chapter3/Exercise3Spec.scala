@@ -6,15 +6,15 @@ import org.scalatest.{Matchers, WordSpec}
 class Exercise3Spec extends WordSpec with Matchers {
   "Exercise 3" should {
     "add an element when setting the head of an empty list" in {
-      setHead(1, Nil) should be(List(1))
+      setHead(1, Nil) shouldBe List(1)
     }
 
     "replace the head element when setting the head of a single element list" in {
-      setHead(1, List(2)) should be(List(1))
+      setHead(1, List(2)) shouldBe List(1)
     }
 
     "replace the head element when setting the head of a double element list" in {
-      setHead(1, List(2, 2)) should be(List(1, 2))
+      setHead(1, List(2, 2)) shouldBe List(1, 2)
     }
   }
 }

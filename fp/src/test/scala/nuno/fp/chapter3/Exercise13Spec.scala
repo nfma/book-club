@@ -8,15 +8,15 @@ class Exercise13Spec extends WordSpec with Matchers {
 
   "Exercise 13" should {
     "fold left with fold right" in {
-      foldLeft(Nil, "a")(concat) should be("a")
-      foldLeft(List("b"), "a")(concat) should be("ab")
-      foldLeft(List("b", "c"), "a")(concat) should be("abc")
+      foldLeft(Nil, "a") {concat} shouldBe "a"
+      foldLeft(List("b"), "a") {concat} shouldBe "ab"
+      foldLeft(List("b", "c"), "a") {concat} shouldBe "abc"
     }
 
     "fold right with fold left" in {
-      foldRight(Nil, "a")(concat) should be("a")
-      foldRight(List("a"), "b")(concat) should be("ab")
-      foldRight(List("a", "b"), "c")(concat) should be("abc")
+      foldRight(Nil, "a") {concat} shouldBe "a"
+      foldRight(List("a"), "b") {concat} shouldBe "ab"
+      foldRight(List("a", "b"), "c") {concat} shouldBe "abc"
     }
   }
 }
