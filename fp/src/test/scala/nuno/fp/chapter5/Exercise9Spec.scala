@@ -7,10 +7,10 @@ import org.scalatest.{Matchers, WordSpec}
 class Exercise9Spec extends WordSpec with Matchers {
   "Exercise 9" should {
     "implement from" in {
-      from(0).take(0) should be(Empty)
-      from(0).take(1).toList should be(Stream(0).toList)
-      from(0).take(2).toList should be(Stream(0, 1).toList)
-      from(0).take(5).toList should be(Stream(0, 1, 2, 3, 4).toList)
+      from(0).take(0) shouldBe Empty
+      from(0).take(1).toList shouldBe Stream(0).toList
+      from(0).take(2).toList shouldBe Stream(0, 1).toList
+      from(0).take(5).toList shouldBe Stream(0, 1, 2, 3, 4).toList
     }
   }
 }

@@ -7,11 +7,11 @@ import org.scalatest.{Matchers, WordSpec}
 class Exercise8Spec extends WordSpec with Matchers {
   "Exercise 8" should {
     "implement fmap" in {
-      flatMap(nonNegativeInt)(_ => nonNegativeInt)(Simple(42)) should be((1281479697, Simple(197491923327988L)))
-      flatMap(nonNegativeInt)(a => rng => {
+      flatMap(nonNegativeInt) {_ => nonNegativeInt} {Simple(42)} shouldBe (1281479697, Simple(197491923327988L))
+      flatMap(nonNegativeInt) {a => rng => {
         val (b, rng2) = rng.nextInt
         (b + a, rng2)
-      })(Simple(42)) should be((-1265320244, Simple(197491923327988L)))
+      }} {Simple(42)} shouldBe (-1265320244, Simple(197491923327988L))
     }
   }
 }

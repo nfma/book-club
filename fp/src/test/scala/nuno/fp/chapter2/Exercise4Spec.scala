@@ -7,11 +7,11 @@ import org.scalatest.{Matchers, WordSpec}
 class Exercise4Spec extends WordSpec with Matchers {
   "Exercise 4" should {
     "uncurry a curried addition function" in {
-      uncurry(curry[Int, Int, Int](_ + _))(1, 1) should be(2)
+      uncurry(curry[Int, Int, Int](_ + _))(1, 1) shouldBe 2
     }
 
     "uncurry a curried concat function" in {
-      uncurry(curry[String, String, String](_.concat(_)))("book-", "club") should be("book-club")
+      uncurry(curry[String, String, String](_.concat(_)))("book-", "club") shouldBe "book-club"
     }
   }
 }

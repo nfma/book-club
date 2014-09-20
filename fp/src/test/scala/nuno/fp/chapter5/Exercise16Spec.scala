@@ -10,10 +10,10 @@ class Exercise16Spec extends WordSpec with Matchers {
     }
 
     "implement scanRight" in {
-      Stream[Int]().scanRight(0)(_ + _).toList should be(List(0))
-      Stream[Int](1).scanRight(0)(_ + _).toList should be(List(1, 0))
-      Stream[Int](1, 2).scanRight(0)(_ + _).toList should be(List(3, 2, 0))
-      Stream[Int](1, 2, 3).scanRight(0)(_ + _).toList should be(List(6, 5, 3, 0))
+      Stream[Int]().scanRight(0) {_ + _}.toList shouldBe List(0)
+      Stream[Int](1).scanRight(0) {_ + _}.toList shouldBe List(1, 0)
+      Stream[Int](1, 2).scanRight(0) {_ + _}.toList shouldBe List(3, 2, 0)
+      Stream[Int](1, 2, 3).scanRight(0) {_ + _}.toList shouldBe List(6, 5, 3, 0)
     }
   }
 }

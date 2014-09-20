@@ -7,11 +7,11 @@ import org.scalatest.{Matchers, WordSpec}
 class Exercise9Spec extends WordSpec with Matchers {
   "Exercise 9" should {
     "implement map in terms of flatMap" in {
-      map(nonNegativeInt)(_ * 2)(Simple(42)) should be(32318906, Simple(1059025964525L))
+      map(nonNegativeInt) {_ * 2} {Simple(42)} shouldBe (32318906, Simple(1059025964525L))
     }
 
     "implement map2 in terms of flatMap" in {
-      map2(nonNegativeInt, nonNegativeInt)((_, _))(Simple(42)) should be((16159453, 1281479697), Simple(197491923327988L))
+      map2(nonNegativeInt, nonNegativeInt) {(_, _)} {Simple(42)} shouldBe ((16159453, 1281479697), Simple(197491923327988L))
     }
   }
 }

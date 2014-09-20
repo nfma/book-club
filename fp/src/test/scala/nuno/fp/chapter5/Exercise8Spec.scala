@@ -7,9 +7,9 @@ import org.scalatest.{Matchers, WordSpec}
 class Exercise8Spec extends WordSpec with Matchers {
   "Exercise 8" should {
     "implement constant" in {
-      constant(1).take(0) should be(Empty)
-      constant(1).take(1).toList should be(Stream(1).toList)
-      constant(1).take(5).toList should be(Stream(1, 1, 1, 1, 1).toList)
+      constant(1).take(0) shouldBe Empty
+      constant(1).take(1).toList shouldBe Stream(1).toList
+      constant(1).take(5).toList shouldBe Stream(1, 1, 1, 1, 1).toList
     }
   }
 

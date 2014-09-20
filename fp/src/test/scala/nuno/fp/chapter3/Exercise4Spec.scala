@@ -23,24 +23,24 @@ class Exercise4Spec extends WordSpec with Matchers {
 
   "Exercise 4" should {
     "return the original list when dropping zero or negative number of elements " in {
-      drop(List(1), 0) should be(List(1))
-      drop(List(1), -1) should be(List(1))
-      drop(List(1), -23) should be(List(1))
+      drop(List(1), 0) shouldBe List(1)
+      drop(List(1), -1) shouldBe List(1)
+      drop(List(1), -23) shouldBe List(1)
     }
 
     "return an empty list when dropping any number of elements of an empty list" in {
-      drop(Nil, 1) should be(Nil)
-      drop(Nil, 435) should be(Nil)
+      drop(Nil, 1) shouldBe Nil
+      drop(Nil, 435) shouldBe Nil
     }
 
     "return an empty list when dropping any positive number of elements of single element list" in {
-      drop(List(1), 1) should be(Nil)
-      drop(List(1), 353) should be(Nil)
+      drop(List(1), 1) shouldBe Nil
+      drop(List(1), 353) shouldBe Nil
     }
 
     "return a list with X less elements when dropping X from a list" in {
-      drop(List(1, 2, 3), 2) should be(List(3))
-      drop(List(1, 2, 3, 4, 5), 2) should be(List(3, 4, 5))
+      drop(List(1, 2, 3), 2) shouldBe List(3)
+      drop(List(1, 2, 3, 4, 5), 2) shouldBe List(3, 4, 5)
     }
   }
 }
