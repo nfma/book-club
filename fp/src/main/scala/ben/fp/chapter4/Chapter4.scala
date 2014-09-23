@@ -1,9 +1,8 @@
 package ben.fp.chapter4
 
-import scala.annotation.tailrec
+import ben.fp.chapter3.{Cons, List, Nil}
 
 object Chapter4 {
-
 
   trait Option[+A] {
 
@@ -28,7 +27,6 @@ object Chapter4 {
     def map2[A, B, C](a: Option[A], b: Option[B])(f: (A, B) => C): Option[C] =
       a flatMap (a => b map (b => f(a, b)))
 
-
     def mean(xs: Seq[Double]): Option[Double] =
       if (xs.isEmpty) None
       else Some(xs.sum / xs.length)
@@ -36,38 +34,82 @@ object Chapter4 {
     def variance(xs: Seq[Double]): Option[Double] =
       mean(xs) flatMap (m => mean(xs.map(x => math.pow(x - m, 2))))
 
+    def sequence[A](a: List[Option[A]]): Option[List[A]] = traverse(a)(identity)
 
-    def sequence[A](a: List[Option[A]]): Option[List[A]] = {
-
-      @tailrec
-      def iterate(l:List[Option[A]], results:Option[List[A]]) : Option[List[A]] = l match {
-        case Nil => results
-        case None :: tail => None
-        case head@Some(v) :: tail => iterate(tail, results.map(l =>  l ++ List(v)))
-      }
-
-      a match {
-        case Nil => None
-        case head :: tail => iterate(tail, head.map( v => List(v)) )
-      }
-    }
-
-    def traverse[A, B](a: List[A])(f: A => Option[B]): Option[List[B]] = {
-
-      def process(l: List[A], results: Option[List[B]] = None): Option[List[B]] =
-        l match {
-          case Nil => results
-          case x :: xs => process(xs, f(x).flatMap(i => results.map(_ :+ i) orElse Some(List(i)) ))
-        }
-
-
-      process(a)
+    def traverse[A, B](a: List[A])(f: A => Option[B]): Option[List[B]] = a match {
+      case Nil => None
+      case _ => List.foldRight[A, Option[List[B]]](a, Some(Nil))((x, y) => map2(f(x), y)((t, y) => Cons(t, y)))
     }
   }
-
 
   case class Some[+A](get: A) extends Option[A]
 
   case object None extends Option[Nothing]
 
+  trait Either[+E, +A] {
+
+    def map[B](f: A => B): Either[E, B] = this match {
+      case Right(r) => Right(f(r))
+      case Left(e)  => Left(e)
+    }
+
+    def flatMap[EE >: E, B](f: A => Either[EE, B]): Either[EE, B]  = this map f match {
+      case Left(e) => Left(e)
+      case Right(r) => r
+    }
+
+    def orElse[EE >: E, B >: A](b: => Either[EE, B]): Either[EE, B] = this match {
+      case Left(l) => b
+      case Right(r) => Right(r)
+    }
+
+    def map2[EE >: E, B, C](b: Either[EE, B])(f: (A, B) => C): Either[EE, C] = flatMap( r => b.map(f(r,_)))
+
+    def sequence[E, A](es: List[Either[E, A]]): Either[E, List[A]] = es match {
+      case Nil => Right(Nil)
+      case Cons(fail@Left(_), _) => fail
+      case Cons(ok@Right(r), tail) =>  sequence(tail) map(o => Cons(r,o))
+    }
+
+    def traverse[E, A, B](as: List[A])(f: A => Either[E, B]): Either[E, List[B]] = as match {
+      case Nil => Right(Nil)
+      case _ => List.foldRight[A, Either[E, List[B]]](as, Right(Nil)){
+        (a, results) => f(a) flatMap( bs => results.map(Cons(bs,_)))
+      }
+    }
+  }
+
+  case class Left[+E](value: E) extends Either[E, Nothing]
+
+  case class Right[+A](value: A) extends Either[Nothing, A]
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
