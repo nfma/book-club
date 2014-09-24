@@ -15,15 +15,15 @@ class Chapter5Spec extends WordSpec with Matchers {
   }
 
   "Exercise 5.2 - Streams" should {
-    "implement take" ignore {
+    "implement take" in {
 
       stream.take(3).toList shouldBe List("a","b","c")
     }
   }
 
 
-  "Exercise 5.2 - Streams" should {
-    "implement drop" ignore {
+  "Exercise 5.3 - Streams" should {
+    "implement drop" in {
 
       stream.drop(3).toList shouldBe List("d", "e", "f")
     }
