@@ -1,6 +1,8 @@
 package ben.fp.chapter4
 
-import ben.fp.chapter3.{Cons, List, Nil}
+import ben.fp.chapter3.{List, Cons, Nil}
+
+import scala.annotation.tailrec
 
 object Chapter4 {
 
@@ -65,17 +67,20 @@ object Chapter4 {
 
     def map2[EE >: E, B, C](b: Either[EE, B])(f: (A, B) => C): Either[EE, C] = flatMap( r => b.map(f(r,_)))
 
-    def sequence[E, A](es: List[Either[E, A]]): Either[E, List[A]] = es match {
-      case Nil => Right(Nil)
+    def sequence[E, A](es: List[Either[E, A]]): Either[E, List[A]] = sequence(es, Nil)
+
+    import List._
+
+    @tailrec
+    private def sequence[E, A](es: List[Either[E, A]], rs:List[A]): Either[E, List[A]] = es match {
+      case Nil => Right(reverse(rs))
       case Cons(fail@Left(_), _) => fail
-      case Cons(ok@Right(r), tail) =>  sequence(tail) map(o => Cons(r,o))
+      case Cons(Right(r), tail) =>  sequence(tail, Cons(r,rs))
     }
 
     def traverse[E, A, B](as: List[A])(f: A => Either[E, B]): Either[E, List[B]] = as match {
       case Nil => Right(Nil)
-      case _ => List.foldRight[A, Either[E, List[B]]](as, Right(Nil)){
-        (a, results) => f(a) flatMap( bs => results.map(Cons(bs,_)))
-      }
+      case _ => foldRight[A, Either[E, List[B]]](as, Right(Nil))((a, aa) => f(a) flatMap( na => aa.map(Cons(na,_))))
     }
   }
 
