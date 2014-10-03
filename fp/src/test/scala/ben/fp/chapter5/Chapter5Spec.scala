@@ -153,4 +153,103 @@ class Chapter5Spec extends WordSpec with Matchers {
       Stream.ones.take(5).toList shouldBe List(1,1,1,1,1)
     }
   }
+
+  "Exercise 5.13 - Streams" should {
+
+    "provide function map implemented using unfold" in {
+
+      Stream(1,2,3).map2(_ + 1).toList shouldBe List(2,3,4)
+    }
+
+    "provide function take implemented using unfold" in {
+      Stream.from2(0).take2(10).toList shouldBe List(0,1,2,3,4,5,6,7,8,9)
+    }
+
+    "provide function takeWhile implemented using unfold" in {
+      stringStream.takeWhile2(_ => true).toList shouldBe stringStream.toList
+      val sublist: List[String] = List("a", "b", "c")
+      stringStream.takeWhile2(s => sublist.contains(s)).toList shouldBe List("a", "b", "c")
+    }
+
+    "provide function zipWith implemented using unfold" in {
+
+      stringStream.zipWith(stringStream)(_ + _).toList shouldBe List("aa","bb","cc","dd","ee","ff")
+      stringStream.zipWith(stringStream)(_ + _).take(2).toList shouldBe List("aa", "bb")
+      stringStream.zipWith(stringStream.take(2))(_ + _).toList shouldBe List("aa", "bb")
+      stringStream.take(2).zipWith(stringStream)(_ + _).toList shouldBe List("aa", "bb")
+    }
+
+    "provide function zipAll implemented using unfold" in {
+
+      stringStream.zipAll(stringStream).toList shouldBe List(
+        Some("a") -> Some("a"),
+        Some("b") -> Some("b"),
+        Some("c") -> Some("c"),
+        Some("d") -> Some("d"),
+        Some("e") -> Some("e"),
+        Some("f") -> Some("f")
+      )
+
+      stringStream.zipAll(stringStream).take(2).toList shouldBe List(
+        Some("a") -> Some("a"),
+        Some("b") -> Some("b")
+      )
+
+      stringStream.zipAll(stringStream.take(2)).toList shouldBe List(
+        Some("a") -> Some("a"),
+        Some("b") -> Some("b"),
+        Some("c") -> None,
+        Some("d") -> None,
+        Some("e") -> None,
+        Some("f") -> None
+      )
+
+      stringStream.take(2).zipAll(stringStream).toList shouldBe List(
+        Some("a") -> Some("a"),
+        Some("b") -> Some("b"),
+        None -> Some("c"),
+        None -> Some("d"),
+        None -> Some("e"),
+        None -> Some("f")
+      )
+    }
+
+  }
+
+  "Exercise 5.14 - Streams" should {
+
+    "startsWith" in {
+
+      Stream(1,2,3) startsWith Stream(1,2,3) shouldBe true
+      Stream(1,2,3) startsWith Stream(1,2) shouldBe true
+      Stream(1,2,3) startsWith Stream(1) shouldBe true
+
+      Stream(1,2,3) startsWith Stream.empty[Int] shouldBe false
+      Stream(1,2,3) startsWith Stream(2,3) shouldBe false
+    }
+  }
+
+  "Exercise 5.15 - Streams" should {
+
+    "tails" in {
+
+      Stream(1,2,3).tails.toList.map(_.toList) shouldBe List(
+        List(1,2,3),
+        List(2,3),
+        List(3),
+        List()
+      )
+    }
+  }
+
+
+  "Exercise 5.16 - Streams" should {
+
+    "hasSubsequence" in {
+
+      Stream(1,2,3).hasSubsequence(Stream(2,3)) shouldBe true
+      Stream(1,2,3).hasSubsequence(Stream(3)) shouldBe true
+      Stream(1,2,3).hasSubsequence(Stream(5)) shouldBe false
+    }
+  }
 }
