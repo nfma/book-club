@@ -9,7 +9,9 @@ object Exercise1 {
 
     def foldRight[B](z: => B)(f: (A, => B) => B): B =
       this match {
-        case Cons(h, t) => f(h(), t().foldRight(z)(f))
+        case Cons(h, t) => {
+          f(h(), t().foldRight(z)(f))
+        }
         case _ => z
       }
 
@@ -51,8 +53,15 @@ object Exercise1 {
       case _ => Stream()
     }
 
-    def forAll(p: A => Boolean): Boolean = true
-//      foldRight(false)((a, b) => p(a) || b)
+    def takeWhileFoldRight(f: A => Boolean): Stream[A] = {
+      foldRight(Stream[A]())((a,b) =>
+        if (f(a)) Stream.cons(a, b)
+        else b
+      )
+    }
+
+    def forAll(f: A => Boolean): Boolean =
+      foldRight(true)((a,b) => { f(a) && b})
 
     def startsWith[A](s: Stream[A]): Boolean = sys.error("todo")
 

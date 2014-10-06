@@ -39,11 +39,17 @@ class Chapter5Spec extends WordSpec with Matchers {
   "Exercise 5.4 - forAll" should {
     "implement forAll(p: A => Boolean)" in {
       Stream() forAll {_ => true} shouldBe true
-//      Stream(1, 2) forAll {_ => false} shouldBe false
-//      Stream(1, 2) forAll {_ => true} shouldBe true
-//      Stream(2, 4, 5) forAll {_ % 2 == 0} shouldBe false
+      Stream(1, 2) forAll {_ => false} shouldBe false
+      Stream(1, 2) forAll {_ => true} shouldBe true
+      Stream(2, 4, 5) forAll {_ % 2 == 0} shouldBe false
     }
   }
 
+  "Exercise 5.5 - takeWhileFoldRight" should {
+    "implement takeWhileFoldRight(p: A => Boolean)" in {
+      Stream(1, 2, 3, 4, 5).takeWhileFoldRight(_ => true).toList should be(Stream(1,2,3,4,5).toList)
+      Stream(1, 2, 3, 4, 5).takeWhileFoldRight(_ % 2 == 0).toList should be(Stream(2,4).toList)
+    }
+  }
 
 }
