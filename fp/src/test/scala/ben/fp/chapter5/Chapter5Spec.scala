@@ -30,7 +30,6 @@ class Chapter5Spec extends WordSpec with Matchers {
   "Exercise 5.3 - Streams" should {
     "implement takeWhile" in {
 
-
       stringStream.takeWhile1(_ => true).toList shouldBe stringStream.toList
       val sublist: List[String] = List("a", "b", "c")
       stringStream.takeWhile1(s => sublist.contains(s)).toList shouldBe List("a", "b", "c")
