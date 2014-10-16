@@ -6,6 +6,8 @@ trait RNG {
 
 object RNG {
 
+  type Rand[+A] = RNG => (A, RNG)
+
   case class SimpleRNG(seed: Long) extends RNG {
     def nextInt: (Int, RNG) = {
       val newSeed = (seed * 0x5DEECE66DL + 0xBL) & 0xFFFFFFFFFFFFL
@@ -17,8 +19,8 @@ object RNG {
 
   def nonNegativeInt(rng: RNG): (Int, RNG) = {
     rng.nextInt match {
-      case (int, nextRng) if int < 0 => (0, nextRng)
-      case result => result
+      case (i, gen) if i == Int.MinValue => (0, gen)
+      case (i, gen) => (Math.abs(i), gen)
     }
   }
 
@@ -44,4 +46,23 @@ object RNG {
     val (dub3, gen3) = double(gen2)
     (dub1, dub2, dub3) -> gen3
   }
+
+  def ints(count: Int)(rng: RNG): (List[Int], RNG) = {
+    (1 to count).foldLeft(List.empty[Int] -> rng) {
+      case ((intList, rg), i) =>
+        val (int, gen) = nonNegativeInt(rg)
+        (int +: intList , gen)
+    }
+  }
+
+  def unit[A](a: A): Rand[A] = (rng:RNG) => (a, rng)
+
+  def double2(rng: RNG): (Double, RNG) = map(nonNegativeInt)( _ / Int.MaxValue.toDouble)(rng)
+
+  def map[A,B](s: Rand[A])(f: A => B): Rand[B] = rng => {
+    val (a, rng2) = s(rng)
+    (f(a), rng2)
+  }
+
+  def map2[A,B,C](ra: Rand[A], rb: Rand[B])(f: (A, B) => C): Rand[C] = ???
 }
