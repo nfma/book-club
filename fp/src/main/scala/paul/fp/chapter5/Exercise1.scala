@@ -1,7 +1,6 @@
 package paul.fp.chapter5
 
 import Stream._
-import scala.collection.immutable
 
 object Exercise1 {
 
@@ -60,10 +59,24 @@ object Exercise1 {
       )
     }
 
+    def headOption: Option[A] = {
+      foldRight(None: Option[A])((a, b) => Option(a))
+    }
+
     def forAll(f: A => Boolean): Boolean =
       foldRight(true)((a,b) => { f(a) && b})
 
     def startsWith[A](s: Stream[A]): Boolean = sys.error("todo")
+
+    def map[B](f: A => B): Stream[B] = {
+      foldRight(Stream.empty[B])((h,t) => Stream.cons(f(h), t))
+    }
+
+    def filter[B](f: A => Boolean): Stream[A] = ???
+
+    def append[B>:A](s: => Stream[B]): Stream[B] = ???
+
+    def flatMap[B](f: A => Stream[B]): Stream[B] = ???
 
     def toList: List[A] = {
 

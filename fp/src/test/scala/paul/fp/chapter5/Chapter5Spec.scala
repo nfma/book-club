@@ -52,4 +52,17 @@ class Chapter5Spec extends WordSpec with Matchers {
     }
   }
 
+  "Exercise 5.6 - headOptionFoldRight" should {
+    "implement headOptionFoldRight(p: A => Boolean)" in {
+      Stream(1, 2, 3, 4, 5).headOption should be(Option(1))
+    }
+  }
+
+"Exercise 5.7 - map, filter and append using foldRight" should {
+    "implement map(p: A => Boolean)" in {
+//      Stream(1, 2, 3, 4, 5) map {_ = _ * 2} should be(Stream(2, 4, 6, 8, 10))
+    }
+  }
+
+
 }
