@@ -2,6 +2,8 @@ package paul.fp.chapter6
 
 object Exercise1 {
 
+  type Rand[+A] = RNG => (A, RNG)
+
   def nonNegativeInt(rng: RNG): (Int, RNG) = rng.nextInt match {
     case (i, gen) if i == Int.MinValue => (0, gen)
     case (i, gen) => (Math.abs(i), gen)
@@ -20,4 +22,11 @@ object Exercise1 {
     }
   }
 
+  def map[A,B](s: Rand[A])(f: A => B): Rand[B] = rng => {
+    val (a, rng2) = s(rng)
+    (f(a), rng2)
+  }
+
+  def nonNegativeEven: Rand[Int] =
+    map(nonNegativeInt)(i => i - i % 2)
 }
