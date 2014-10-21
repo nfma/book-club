@@ -81,8 +81,6 @@ class Chapter6Spec extends WordSpec with Matchers {
     }
   }
 
-
-
   "6.6 RNG" should {
 
     "create a reproducable double" in {
