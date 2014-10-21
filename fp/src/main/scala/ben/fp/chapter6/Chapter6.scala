@@ -64,5 +64,9 @@ object RNG {
     (f(a), rng2)
   }
 
-  def map2[A,B,C](ra: Rand[A], rb: Rand[B])(f: (A, B) => C): Rand[C] = ???
+  def map2[A,B,C](ra: Rand[A], rb: Rand[B])(f: (A, B) => C): Rand[C] = someRngWillGoHereLater =>{
+     val (a, rng1) = ra(someRngWillGoHereLater)
+     val (b, rng2) = rb(rng1)
+    (f(a,b), rng2)
+  }
 }

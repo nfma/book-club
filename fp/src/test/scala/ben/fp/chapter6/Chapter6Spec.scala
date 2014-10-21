@@ -80,4 +80,14 @@ class Chapter6Spec extends WordSpec with Matchers {
       double2 {SimpleRNG(259172689157871L)} shouldBe (0.9386595436086224, SimpleRNG(149370390209998L))
     }
   }
+
+
+
+  "6.6 RNG" should {
+
+    "create a reproducable double" in {
+
+      map2(nonNegativeInt, nonNegativeInt)(_ + _)(SimpleRNG(42)) shouldBe (1297639150,SimpleRNG(197491923327988L))
+    }
+  }
 }
