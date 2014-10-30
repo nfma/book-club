@@ -3,6 +3,8 @@ package nuno.fp.chapter5
 import nuno.fp.chapter4.Exercise1.{None, Option, Some}
 import nuno.fp.chapter5.Exercise1.Stream.{cons, empty, unfold}
 
+import scala.annotation.tailrec
+
 object Exercise1 {
 
   sealed trait Stream[+A] {
