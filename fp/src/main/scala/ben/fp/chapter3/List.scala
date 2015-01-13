@@ -26,9 +26,9 @@ object List {
     case Cons(x,xs) => foldLeft(xs, f(z,x))(f)
   }
 
-  def foldRightUsingFoldLeft[A,B](as: List[A], z: B)(f: (A, B) => B): B = foldLeft(as, identity[B])((g, a) => b => g(f(a, b)))(z)
+  def foldRightUsingFoldLeft[A,B](as: List[A], z: B)(f: (A, B) => B): B = foldLeft(reverse(as), z)((b,a)=>f(a,b))
 
-  def foldLeftUsingFoldRight[A,B](as: List[A], z: B)(f: (B, A) => B): B = foldRight(as, identity[B])((a, g) => b => g(f(b, a)))(z)
+  def foldLeftUsingFoldRight[A,B](l: List[A], z: B)(f: (B, A) => B): B = foldRight(reverse(l), z)((b,a)=>f(a,b))
 
   def sum2(ns: List[Int]) =
     foldRight(ns, 0)((x,y) => x + y)
