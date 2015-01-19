@@ -84,16 +84,16 @@ object Exercise3 {
     }
 
     def foldPar[A](s: IndexedSeq[A])(zero: A)(f: (A, A) => A): Par[A] = if (s.size <= 1)
-      unit(s.headOption getOrElse zero) else {
+      unit(s.headOption getOrElse zero)
+    else {
       val (l, r) = s.splitAt(s.length / 2)
       foldPar(l)(zero)(f).map2(foldPar(r)(zero)(f))(f)
     }
 
-    def foldPar[A, B](s: List[A])(zero: B)(f: (A, B) => B): Par[B] = {
-      s match {
-        case Nil => unit(zero)
-        case h :: t => unit(h).map2(foldPar(t)(zero)(f))(f)
-      }
+    def foldPar[A, B](s: List[A])(zero: B)(f: (A, B) => B): Par[B] = s match {
+      case Nil => unit(zero)
+      case h :: t => unit(h).map2(foldPar(t)(zero)(f))(f)
     }
   }
+
 }
