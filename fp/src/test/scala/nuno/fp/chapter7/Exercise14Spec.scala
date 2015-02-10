@@ -3,7 +3,7 @@ package nuno.fp.chapter7
 import java.util.concurrent.ScheduledThreadPoolExecutor
 
 import nuno.fp.chapter7.Exercise10.{unit, run => Run}
-import nuno.fp.chapter7.Exercise14.{join, joinFM}
+import nuno.fp.chapter7.Exercise14.{join, joinFM, flatMap}
 import org.scalatest.{Matchers, WordSpec}
 
 class Exercise14Spec extends WordSpec with Matchers {
@@ -19,10 +19,7 @@ class Exercise14Spec extends WordSpec with Matchers {
     }
 
     "implement flatMap (in terms of join)" in {
-      println("""
-          |since I've used the non-deadlocking part,
-          |I have to implement map and map2 to be able
-          |to write flatMap like: join(map(a)(f))""".stripMargin)
+      Run(es)(flatMap(unit(5))(i => unit(false))) shouldBe false
     }
   }
 }

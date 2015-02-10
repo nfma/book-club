@@ -30,7 +30,11 @@ object Exercise10 {
     def apply(cb: A => Unit)(ec: Exception => Unit): Unit = eval(es)(a(es)(cb)(ec))(ec)
   }
 
-  def eval(es: ExecutorService)(r: => Unit)(e: Exception => Unit): Unit = es.submit(new Callable[Unit] {
+  def map[A, B](a: Par[A])(f: A => B): Par[B] = es => new Future[B] {
+    def apply(cb: B => Unit)(ec: Exception => Unit): Unit = a(es)(a => eval(es)(cb(f(a)))(ec))(ec)
+  }
+
+  private def eval(es: ExecutorService)(r: => Unit)(e: Exception => Unit): Unit = es.submit(new Callable[Unit] {
       def call = try {r} catch { case ex: Exception => e(ex) }
   })
 }
